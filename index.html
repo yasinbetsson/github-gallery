@@ -84,6 +84,27 @@
     <div class="container">
       <h2>Markdown to Image Gallery Converter</h2>
 
+      <details style="margin-bottom:18px;">
+        <summary style="font-weight:600; font-size:1.08em; cursor:pointer; color:#6366f1;">About & Usage Notes</summary>
+        <div style="margin-top:10px; color:#374151; font-size:0.98em;">
+          <p><b>What is this?</b><br>
+          This tool converts a list of GitHub Markdown image links into HTML <code>&lt;img&gt;</code> tags, making it easy to create a gallery from your Markdown image list.</p>
+          <ul style="margin-left:1em;">
+            <li>Paste your Markdown image list (e.g., <code>![alt](https://github.com/user-attachments/assets/...)</code>) into the first textarea.</li>
+            <li>Set the desired <b>height</b> and <b>width</b> for the images (in <code>px</code> or use <code>auto</code> for one dimension).</li>
+            <li>Click <b>Convert & Apply</b> to generate the HTML code for your gallery.</li>
+            <li>The generated HTML will appear in the <b>Gallery</b> textarea below. Copy and use it in your website or documentation.</li>
+          </ul>
+          <b>Usage Notes:</b>
+          <ul style="margin-left:1em;">
+            <li>Only GitHub user-attachments image links are supported.</li>
+            <li>Only one of height or width can be set to <code>auto</code> at a time.</li>
+            <li>Leave a dimension blank to omit it from the <code>&lt;img&gt;</code> tag.</li>
+            <li>All generated HTML is safe to copy and use directly.</li>
+          </ul>
+        </div>
+      </details>
+
       <label for="markdown">Paste GitHub Markdown Image List:</label>
       <textarea id="markdown" rows="10" cols="50"></textarea>
       <label for="height">Height (px or "auto"):</label>
