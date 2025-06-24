@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Markdown to Image Gallery Converter</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      .container {
+        background: #fff;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 32px 28px 24px 28px;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      }
+      h2 {
+        text-align: center;
+        color: #2d3748;
+        margin-bottom: 18px;
+      }
+      label {
+        font-weight: 500;
+        color: #374151;
+        margin-top: 12px;
+        display: block;
+      }
+      textarea, input[type="text"] {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 10px;
+        margin: 8px 0 16px 0;
+        font-size: 1rem;
+        background: #f9fafb;
+        transition: border 0.2s;
+      }
+      textarea:focus, input[type="text"]:focus {
+        border: 1.5px solid #6366f1;
+        outline: none;
+      }
+      button {
+        background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+        margin-top: 8px;
+        margin-bottom: 18px;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: linear-gradient(90deg, #4f46e5 0%, #2563eb 100%);
+      }
+      h3 {
+        color: #475569;
+        margin-top: 24px;
+      }
+      #image-container {
+        min-height: 120px;
+        font-family: 'Fira Mono', 'Consolas', monospace;
+        background: #f3f4f6;
+        color: #334155;
+      }
+      @media (max-width: 700px) {
+        .container {
+          max-width: 98vw;
+          padding: 12px 4vw 18px 4vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Markdown to Image Gallery Converter</h2>
+
+      <label for="markdown">Paste GitHub Markdown Image List:</label>
+      <textarea id="markdown" rows="10" cols="50"></textarea>
+      <label for="height">Height (px or "auto"):</label>
+      <input type="text" id="height" value="200" />
+      <label for="width">Width (px or "auto"):</label>
+      <input type="text" id="width" value="auto" />
+      <button onclick="convertMarkdown()">Convert & Apply</button>
+
+      <h3>Gallery:</h3>
+      <textarea id="image-container" rows="10" cols="50"></textarea>
+    </div>
+    <script>
+      function convertMarkdown() {
+        const markdown = document.getElementById("markdown").value;
+        const height = document.getElementById("height").value.trim();
+        const width = document.getElementById("width").value.trim();
+        const container = document.getElementById("image-container");
+
+        if (height === "auto" && width === "auto") {
+          alert('Only one dimension can be set to "auto".');
+          return;
+        }
+
+        const imageRegex =
+          /!\[([^\]]*)\]\((https:\/\/github\.com\/user-attachments\/assets\/[^\)]+)\)/g;
+        let match;
+        let html = "";
+
+        while ((match = imageRegex.exec(markdown)) !== null) {
+          const alt = match[1];
+          const src = match[2];
+          let imgTag = `<img src="${src}" alt="${alt}"`;
+
+          if (height !== "") imgTag += ` height="${height}"`;
+          if (width !== "") imgTag += ` width="${width}"`;
+
+          imgTag += ">";
+          html += imgTag + "\n";
+        }
+
+        container.value = html || "No images found.";
+      }
+    </script>
+  </body>
+</html>
