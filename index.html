@@ -34,11 +34,12 @@
         width: 100%;
         border: 1px solid #cbd5e1;
         border-radius: 6px;
-        padding: 10px;
+        padding: 10px 14px; /* Increased right/left padding for better appearance */
         margin: 8px 0 16px 0;
         font-size: 1rem;
         background: #f9fafb;
         transition: border 0.2s;
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
       }
       textarea:focus, input[type="text"]:focus {
         border: 1.5px solid #6366f1;
